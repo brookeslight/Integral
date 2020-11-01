@@ -3,7 +3,7 @@ package main;
 public class Main {
 	
 	public static void main(String[] args) {
-		System.out.println(Math.round(integral(0, 10, 1000000)));
+		System.out.println(integral(0, 10, 1000));
 	}
 	
 	public static double f(double x) {
@@ -12,11 +12,12 @@ public class Main {
 	
 	public static double integral(double min, double max, int clarity) {
 		double area = 0;
-		double deltaX = ((max - min)/clarity);
+		double width = ((max - min)/clarity);
+		double height;
 		for(int i = 0; i < clarity; i++) {
-			area += deltaX * f(min + i*deltaX);
+			height = ((f(min + i * width) + f(min + (i+1) * width)) / 2); //take average height between interval
+			area += (width * height);
 		}
 		return area;
 	}
-
 }
